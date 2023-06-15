@@ -58,11 +58,22 @@ TEST(shared_ptrTest, DefaultConstructorTest)
   EXPECT_EQ(expected, value);
 }
 
-TEST(shared_ptrTest, FunctionUseCountReturnOneTest)
+TEST(shared_ptrTest, MoveConstructorOriginalEqualsNullTest) 
 {
-  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
-  long counter = shared_ptr.use_count();
-  auto expected = 1;
+  my::shared_ptr<TestObject> originalPtr(new TestObject(20));
+  my::shared_ptr<TestObject> movedPtr(std::move(originalPtr));
+  auto nullValue = originalPtr.get();
+  auto expected = nullptr;
 
-  EXPECT_EQ(expected, counter);
+  EXPECT_EQ(expected, nullValue);
+}
+
+TEST(shared_ptrTest, MoveConstructorMovedNotEqualsNullTest) 
+{
+  my::shared_ptr<TestObject> originalPtr(new TestObject(20));
+  my::shared_ptr<TestObject> movedPtr(std::move(originalPtr));
+  auto nullValue = movedPtr.get();
+  auto notExpected = nullptr;
+
+  EXPECT_NE(notExpected, nullValue);
 }
