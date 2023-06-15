@@ -29,7 +29,10 @@ namespace my
             return ptr_;
         }
         void reset();
-        long use_count() const;
+        long use_count() const
+        {
+            return *counter_;
+        }
         ~shared_ptr(){}
     };
 }
