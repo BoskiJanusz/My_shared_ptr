@@ -48,3 +48,12 @@ TEST(shared_ptrTest, FunctionGetExpectedValueTest)
 
   EXPECT_EQ(expected, result);
 }
+
+TEST(shared_ptrTest, DefaultConstructorTest)
+{
+  my::shared_ptr<TestObject> shared_ptr;
+  auto value = shared_ptr.get();
+  auto expected = nullptr;
+
+  EXPECT_EQ(expected, value);
+}
