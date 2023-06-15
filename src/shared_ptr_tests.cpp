@@ -19,3 +19,13 @@ TEST(shared_ptrTest, ArrowOperatorTest)
 
   EXPECT_EQ(expected, shared_ptr->multiplyValueByTwo());
 }
+
+TEST(shared_ptrTest, DereferenceOperatorTest)
+{
+  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+  TestObject& dereferencedObj = *shared_ptr;
+  auto result = dereferencedObj.multiplyValueByTwo();
+  auto expected = 40;
+
+  EXPECT_EQ(expected, result);
+}
