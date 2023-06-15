@@ -47,6 +47,22 @@ namespace my
         {
             return *counter_;
         }
-        ~shared_ptr(){}
+        ~shared_ptr()
+        {
+            deleter();
+        }
+    private:
+        void deleter()
+        {
+            (*counter_)--;
+            if(!(*counter_))
+            {
+                if(!ptr_)
+                {
+                    delete ptr_;
+                }
+                delete counter_;
+            }
+        }
     };
 }
