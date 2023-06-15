@@ -24,7 +24,10 @@ namespace my
         {
             return *(ptr_);
         }
-        T* get() const;
+        T* get() const
+        {
+            return ptr_;
+        }
         void reset();
         long use_count() const;
         ~shared_ptr(){}
