@@ -77,3 +77,24 @@ TEST(shared_ptrTest, MoveConstructorMovedNotEqualsNullTest)
 
   EXPECT_NE(notExpected, nullValue);
 }
+
+TEST(shared_ptrTest, CopyConstructorCounterEqualsTwoTest) 
+{
+  my::shared_ptr<TestObject> ptr(new TestObject(20));
+  auto ptr2(ptr);
+  auto ptrCounter = ptr.use_count();
+  auto expected = 2;
+
+  EXPECT_EQ(expected, ptrCounter);
+}
+
+TEST(shared_ptrTest, CopyConstructorCounterEqualsThreeTest) 
+{
+  my::shared_ptr<TestObject> ptr(new TestObject(20));
+  auto ptr2(ptr);
+  auto ptr3(ptr);
+  auto ptrCounter = ptr.use_count();
+  auto expected = 3;
+
+  EXPECT_EQ(expected, ptrCounter);
+}
