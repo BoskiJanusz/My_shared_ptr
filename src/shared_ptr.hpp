@@ -20,7 +20,10 @@ namespace my
         {
             return ptr_;
         }
-        T& operator*() const;
+        T& operator*() const
+        {
+            return *(ptr_);
+        }
         T* get() const;
         void reset();
         long use_count() const;
