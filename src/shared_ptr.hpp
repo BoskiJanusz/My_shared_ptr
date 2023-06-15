@@ -15,11 +15,12 @@ namespace my
         shared_ptr(shared_ptr &&){}
         shared_ptr& operator=(const shared_ptr &){}
         shared_ptr& operator=(shared_ptr &&){}
+        operator bool() const;
         T* operator->() const;
         T& operator*() const;
-        operator bool() const;
         T* get() const;
         void reset();
         long use_count() const;
+        ~shared_ptr(){}
     };
 }
