@@ -57,3 +57,12 @@ TEST(shared_ptrTest, DefaultConstructorTest)
 
   EXPECT_EQ(expected, value);
 }
+
+TEST(shared_ptrTest, FunctionUseCountReturnOneTest)
+{
+  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+  long counter = shared_ptr.use_count();
+  auto expected = 1;
+
+  EXPECT_EQ(expected, counter);
+}
