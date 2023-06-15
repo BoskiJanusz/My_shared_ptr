@@ -7,17 +7,17 @@ namespace my
     {
     private:
         T* ptr_ = nullptr;
-
+        size_t* counter_ = nullptr;
     public:
         shared_ptr(){}
         shared_ptr(T* ptr){}
         shared_ptr(const shared_ptr &){}
         shared_ptr(shared_ptr &&){}
-        shared_ptr& operator(const shared_ptr &){}
-        shared_ptr& operator(shared_ptr &&){}
-        T* operator->();
-        T& operator*();
-        bool operator bool() const;
+        shared_ptr& operator=(const shared_ptr &){}
+        shared_ptr& operator=(shared_ptr &&){}
+        T* operator->() const;
+        T& operator*() const;
+        operator bool() const;
         T* get() const;
         void reset();
         long use_count() const;
