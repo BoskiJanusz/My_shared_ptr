@@ -29,3 +29,22 @@ TEST(shared_ptrTest, DereferenceOperatorTest)
 
   EXPECT_EQ(expected, result);
 }
+
+TEST(shared_ptrTest, FunctionGetExpectedNotNullTest)
+{
+  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+  TestObject* rawPtr = shared_ptr.get();
+  auto expected = nullptr;
+
+  EXPECT_NE(expected, rawPtr);
+}
+
+TEST(shared_ptrTest, FunctionGetExpectedValueTest)
+{
+  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+  TestObject* rawPtr = shared_ptr.get();
+  auto expected = 40;
+  auto result = rawPtr->multiplyValueByTwo();
+
+  EXPECT_EQ(expected, result);
+}
