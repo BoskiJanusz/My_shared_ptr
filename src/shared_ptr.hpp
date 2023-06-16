@@ -69,7 +69,18 @@ namespace my
         {
             return ptr_;
         }
-        void reset();
+        void reset()
+        {
+            if(ptr_)
+            {
+                delete ptr_;
+                ptr_ = nullptr;
+                if(counter_)
+                {
+                    (*counter_)--;
+                }
+            }
+        }
         long use_count() const
         {
             return *counter_;
@@ -89,8 +100,10 @@ namespace my
                     if(ptr_)
                     {
                         delete ptr_;
+                        ptr_ = nullptr;
                     }
                     delete counter_;
+                    counter_ = nullptr;
                 }
             }
         }
