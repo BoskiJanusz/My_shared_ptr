@@ -98,3 +98,38 @@ TEST(shared_ptrTest, CopyConstructorCounterEqualsThreeTest)
 
   EXPECT_EQ(expected, ptrCounter);
 }
+
+TEST(shared_ptrTest, CopyAssignmentDefultConstructorTest) 
+{
+  my::shared_ptr<TestObject> ptr;
+  my::shared_ptr<TestObject> ptr2;
+  ptr2 = ptr;
+  auto ptrCounter = ptr.use_count();
+  auto expected = 0;
+
+  EXPECT_EQ(expected, ptrCounter);
+}
+
+TEST(shared_ptrTest, CopyAssignmentCounterEqualsTwoTest) 
+{
+  my::shared_ptr<TestObject> ptr(new TestObject(20));
+  my::shared_ptr<TestObject> ptr2(new TestObject(20));
+  ptr2 = ptr;
+  auto ptrCounter = ptr.use_count();
+  auto expected = 2;
+
+  EXPECT_EQ(expected, ptrCounter);
+}
+
+TEST(shared_ptrTest, CopyAssignmentCounterEqualsThreeTest) 
+{
+  my::shared_ptr<TestObject> ptr(new TestObject(20));
+  my::shared_ptr<TestObject> ptr2(new TestObject(20));
+  my::shared_ptr<TestObject> ptr3(new TestObject(20));
+  ptr2 = ptr;
+  ptr3 = ptr;
+  auto ptrCounter = ptr.use_count();
+  auto expected = 3;
+
+  EXPECT_EQ(expected, ptrCounter);
+}
