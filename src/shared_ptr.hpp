@@ -11,10 +11,8 @@ namespace my
     public:
         shared_ptr() : ptr_(nullptr), counter_(new size_t{0}){}
         shared_ptr(T* ptr) : ptr_(ptr), counter_(new size_t{1}){}
-        shared_ptr(const shared_ptr & obj)
+        shared_ptr(const shared_ptr & obj) : ptr_(obj.ptr_), counter_(obj.counter_)
         {
-            ptr_ = obj.ptr_;
-            counter_ = obj.counter_;
             if(obj.ptr_)
             {
                 (*counter_)++;
