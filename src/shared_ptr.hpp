@@ -37,7 +37,18 @@ namespace my
             }
             return *this;
         }
-        shared_ptr& operator=(shared_ptr &&){}
+        shared_ptr& operator=(shared_ptr && obj)
+        {
+            if(this != &obj)
+            {
+                deleter();
+                ptr_ = obj.ptr_;
+                counter_ = obj.counter_;
+                obj.ptr_ = nullptr;
+                obj.counter_ = nullptr;
+            }
+            return *this;
+        }
         operator bool() const;
         T* operator->() const
         {
