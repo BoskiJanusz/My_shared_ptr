@@ -49,7 +49,14 @@ namespace my
             }
             return *this;
         }
-        operator bool() const;
+        operator bool() const
+        {
+            if(ptr_)
+            {
+                return true;
+            }
+            return false;
+        }
         T* operator->() const
         {
             return ptr_;
