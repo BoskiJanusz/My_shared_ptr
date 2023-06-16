@@ -133,3 +133,23 @@ TEST(shared_ptrTest, CopyAssignmentCounterEqualsThreeTest)
 
   EXPECT_EQ(expected, ptrCounter);
 }
+
+TEST(shared_ptrTest, MoveOperatorMoveOriginalPtrEqualsNullTest) 
+{
+  my::shared_ptr<TestObject> originalPtr(new TestObject(20));
+  auto newPtr = std::move(originalPtr);
+  auto nullValue = originalPtr.get();
+  auto expected = nullptr;
+
+  EXPECT_EQ(expected, nullValue);
+}
+
+TEST(shared_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest) 
+{
+  my::shared_ptr<TestObject> originalPtr(new TestObject(20));
+  auto newPtr = std::move(originalPtr);
+  auto notNullValue = newPtr.get();
+  auto notExpected = nullptr;
+
+  EXPECT_NE(notExpected, notNullValue);
+}
