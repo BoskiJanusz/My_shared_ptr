@@ -153,3 +153,29 @@ TEST(shared_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest)
 
   EXPECT_NE(notExpected, notNullValue);
 }
+
+TEST(shared_ptrTest, BoolOperatorReturnsFalse) 
+{
+  my::shared_ptr<TestObject> originalPtr;
+  bool isNullValue = true;
+  if(originalPtr)
+  {
+    isNullValue = false;
+  }
+  auto expected = true;
+
+  EXPECT_EQ(expected, isNullValue);
+}
+
+TEST(shared_ptrTest, BoolOperatorReturnsTrue) 
+{
+  my::shared_ptr<TestObject> originalPtr(new TestObject(20));
+  bool isNullValue = true;
+  if(originalPtr)
+  {
+    isNullValue = false;
+  }
+  auto expected = false;
+
+  EXPECT_EQ(expected, isNullValue);
+}
