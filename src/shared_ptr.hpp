@@ -27,7 +27,20 @@ namespace my
             obj.ptr_ = nullptr;
             obj.counter_ = nullptr;
         }
-        shared_ptr& operator=(const shared_ptr &){}
+        shared_ptr& operator=(const shared_ptr & obj)
+        {
+            if(this != &obj)
+            {
+                deleter();
+                ptr_ = obj.ptr_;
+                counter_ = obj.counter_;
+                if(obj.ptr_)
+                {
+                    (*counter_)++;
+                }
+            }
+            return *this;
+        }
         shared_ptr& operator=(shared_ptr &&){}
         operator bool() const;
         T* operator->() const
@@ -54,14 +67,17 @@ namespace my
     private:
         void deleter()
         {
-            (*counter_)--;
-            if(!(*counter_))
+            if(counter_)
             {
-                if(!ptr_)
+                (*counter_)--;
+                if((*counter_) == 0)
                 {
-                    delete ptr_;
+                    if(ptr_)
+                    {
+                        delete ptr_;
+                    }
+                    delete counter_;
                 }
-                delete counter_;
             }
         }
     };
