@@ -18,10 +18,8 @@ namespace my
                 (*counter_)++;
             }
         }
-        shared_ptr(shared_ptr && obj)
+        shared_ptr(shared_ptr && obj) : ptr_(obj.ptr_), counter_(obj.counter_)
         {
-            ptr_ = obj.ptr_;
-            counter_ = obj.counter_;
             obj.ptr_ = nullptr;
             obj.counter_ = nullptr;
         }
