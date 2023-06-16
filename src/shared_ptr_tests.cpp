@@ -179,3 +179,23 @@ TEST(shared_ptrTest, BoolOperatorReturnsTrue)
 
   EXPECT_EQ(expected, isNullValue);
 }
+
+TEST(shared_ptrTest, FunctionResetOnePtrNotNullEqualsNull)
+{
+  my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+  shared_ptr.reset();
+  auto nullValue = shared_ptr.get();
+  auto expected = nullptr;
+
+  EXPECT_EQ(expected, nullValue);
+}
+
+TEST(shared_ptrTest, FunctionResetOnePtrNullEqualsNull)
+{
+  my::shared_ptr<TestObject> shared_ptr;
+  shared_ptr.reset();
+  auto nullValue = shared_ptr.get();
+  auto expected = nullptr;
+
+  EXPECT_EQ(expected, nullValue);
+}
