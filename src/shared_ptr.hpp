@@ -69,16 +69,17 @@ namespace my
         {
             return ptr_;
         }
-        void reset()
+        void reset(T* newPtr)
         {
-            if(ptr_)
+            T* tempPtr = ptr_;
+            ptr_ = newPtr;
+            if (tempPtr != nullptr) {
+                delete tempPtr;
+                tempPtr = nullptr;
+            }
+            if(*(counter_))
             {
-                delete ptr_;
-                ptr_ = nullptr;
-                if(counter_)
-                {
-                    (*counter_)--;
-                }
+                (*counter_)--;
             }
         }
         long use_count() const
