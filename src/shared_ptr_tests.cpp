@@ -161,7 +161,7 @@ TEST(shared_ptrTest, BoolOperatorReturnsTrue) {
     EXPECT_EQ(expected, isNullValue);
 }
 
-TEST(shared_ptrTest, FunctionResetUniquePtrEqualsNull) {
+TEST(shared_ptrTest, FunctionResetSharedPtrEqualsNull) {
     my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
     shared_ptr.reset(nullptr);
     auto value = shared_ptr.get();
@@ -170,7 +170,7 @@ TEST(shared_ptrTest, FunctionResetUniquePtrEqualsNull) {
     EXPECT_EQ(value, expected);
 }
 
-TEST(shared_ptrTest, FunctionResetUniquePtrNotEqualsZero) {
+TEST(shared_ptrTest, FunctionResetSharedPtrNotEqualsZero) {
     my::shared_ptr<int> shared_ptr(new int{10});
     shared_ptr.reset(new int{0});
     auto value = shared_ptr.get();
@@ -179,11 +179,20 @@ TEST(shared_ptrTest, FunctionResetUniquePtrNotEqualsZero) {
     EXPECT_NE(value, notExpected);
 }
 
-TEST(shared_ptrTest, FunctionResetUniquePtrEqualsZero) {
+TEST(shared_ptrTest, FunctionResetSharedPtrEqualsZero) {
     my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
     shared_ptr.reset(new TestObject(0));
     auto value = shared_ptr->value_;
     auto expected = 0;
+
+    EXPECT_EQ(value, expected);
+}
+
+TEST(shared_ptrTest, FunctionResetSharedPtrEqualsNullptr) {
+    my::shared_ptr<TestObject> shared_ptr(new TestObject(20));
+    shared_ptr.reset();
+    auto value = shared_ptr.get();
+    auto expected = nullptr;
 
     EXPECT_EQ(value, expected);
 }
