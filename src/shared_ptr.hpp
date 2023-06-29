@@ -9,7 +9,7 @@ private:
 
 public:
     shared_ptr()
-        : ptr_(nullptr), counter_(new size_t{1}) {}
+        : ptr_(nullptr), counter_(new size_t{0}) {}
     shared_ptr(T* ptr)
         : ptr_(ptr), counter_(new size_t{1}) {}
     shared_ptr(const shared_ptr& obj)
@@ -80,7 +80,10 @@ public:
 private:
     void deleter() {
         if (counter_) {
-            (*counter_)--;
+            if(*(counter_) != 0)
+            {
+                (*counter_)--;
+            }
             if ((*counter_) == 0) {
                 if (ptr_) {
                     delete ptr_;
