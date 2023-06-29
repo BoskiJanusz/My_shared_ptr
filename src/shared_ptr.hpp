@@ -25,8 +25,7 @@ public:
     }
     shared_ptr& operator=(const shared_ptr& obj) {
         if (this != &obj) {
-            if(ptr_ != obj.ptr_)
-            {
+            if (ptr_ != obj.ptr_) {
                 deleter();
                 ptr_ = obj.ptr_;
                 counter_ = obj.counter_;
@@ -83,8 +82,7 @@ public:
 private:
     void deleter() {
         if (counter_) {
-            if(*(counter_) != 0)
-            {
+            if (*(counter_) != 0) {
                 (*counter_)--;
             }
             if ((*counter_) == 0) {
