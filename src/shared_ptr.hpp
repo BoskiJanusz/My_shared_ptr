@@ -25,11 +25,14 @@ public:
     }
     shared_ptr& operator=(const shared_ptr& obj) {
         if (this != &obj) {
-            deleter();
-            ptr_ = obj.ptr_;
-            counter_ = obj.counter_;
-            if (obj.ptr_) {
-                (*counter_)++;
+            if(ptr_ != obj.ptr_)
+            {
+                deleter();
+                ptr_ = obj.ptr_;
+                counter_ = obj.counter_;
+                if (obj.ptr_) {
+                    (*counter_)++;
+                }
             }
         }
         return *this;
