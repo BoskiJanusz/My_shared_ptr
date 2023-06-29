@@ -9,7 +9,7 @@ private:
 
 public:
     shared_ptr()
-        : ptr_(nullptr), counter_(new size_t{0}) {}
+        : ptr_(nullptr), counter_(new size_t{1}) {}
     shared_ptr(T* ptr)
         : ptr_(ptr), counter_(new size_t{1}) {}
     shared_ptr(const shared_ptr& obj)
