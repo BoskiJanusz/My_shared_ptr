@@ -30,6 +30,13 @@ namespace my{
                 }
             }
         }
+        weak_ptr( weak_ptr&& obj )
+        : ptr_(obj.ptr_), shared_refs_(obj.shared_refs_), weak_refs_(obj.weak_refs_)
+        {
+            obj.ptr_ = nullptr;
+            obj.shared_refs_ = nullptr;
+            obj.weak_refs_ = nullptr;
+        }
         weak_ptr& operator=(const weak_ptr& obj)
         {
             if (this != &obj) 
