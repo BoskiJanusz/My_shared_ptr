@@ -25,6 +25,19 @@ public:
         obj.ptr_ = nullptr;
         obj.shared_refs_ = nullptr;
     }
+    shared_ptr(const weak_ptr<T>& obj)
+        : ptr_(obj.ptr_), shared_refs_(obj.shared_refs_) {
+        if (obj.ptr_) {
+            if(obj.shared_refs_)
+            {
+                (*shared_refs_)++;
+            }
+            else
+            {
+                shared_refs_ = new size_t{1};
+            }
+        }
+    }
     shared_ptr& operator=(const shared_ptr& obj) {
         if (this != &obj) {
             if (ptr_ != obj.ptr_) {

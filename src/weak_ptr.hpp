@@ -49,8 +49,10 @@ namespace my{
             return *this;
         }
         weak_ptr& operator=(weak_ptr&&);
-        //template <class Y>
-        //shared_ptr lock();
+        shared_ptr<T> lock() const
+        {
+            return expired() ? shared_ptr<T>(*this) : shared_ptr<T>();
+        }
         long use_count() const
         {
             if(shared_refs_)
@@ -88,5 +90,6 @@ namespace my{
                 }
             }
         }
+    template<class Y> friend class shared_ptr;
     };
 }  // namespace my
