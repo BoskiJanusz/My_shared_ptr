@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(my_shared_ptr VERSION 1.0)
+project(my_ptr VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -21,10 +21,15 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 
 enable_testing()
 
-add_executable(${PROJECT_NAME}-ut src/shared_ptr_tests.cpp )
-target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
+add_executable(${PROJECT_NAME}_shared-ut src/shared_ptr_tests.cpp )
+target_compile_options(${PROJECT_NAME}_shared-ut PRIVATE ${FLAGS})
 
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+add_executable(${PROJECT_NAME}_weak-ut src/weak_ptr_tests.cpp )
+target_compile_options(${PROJECT_NAME}_weak-ut PRIVATE ${FLAGS})
+
+target_link_libraries(${PROJECT_NAME}_shared-ut gtest_main)
+target_link_libraries(${PROJECT_NAME}_weak-ut gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}-ut)
+gtest_discover_tests(${PROJECT_NAME}_shared-ut)
+gtest_discover_tests(${PROJECT_NAME}_weak-ut)
