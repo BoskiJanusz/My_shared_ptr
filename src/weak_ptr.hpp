@@ -55,13 +55,16 @@ namespace my{
         }
         long use_count() const
         {
-            if(shared_refs_)
+            if(weak_refs_)
             {
-                return *(shared_refs_);
+                return *(weak_refs_);
             }
             return 0;
         }
-        void reset();
+        void reset()
+        {
+            *(weak_refs_) = 0;
+        }
         bool expired() const
         {
             if(ptr_)
