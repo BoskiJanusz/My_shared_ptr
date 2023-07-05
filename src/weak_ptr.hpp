@@ -48,7 +48,20 @@ namespace my{
             }
             return *this;
         }
-        weak_ptr& operator=(weak_ptr&&);
+        weak_ptr& operator=(weak_ptr&& obj)
+        {
+            if (this != &obj) 
+            {
+                deleter();
+                ptr_ = obj.ptr_;
+                shared_refs_ = obj.shared_refs_;
+                weak_refs_ = obj.weak_refs_;
+                obj.ptr_ = nullptr;
+                obj.shared_refs_ = nullptr;
+                obj.weak_refs_ = nullptr;
+            }
+            return *this;
+        }
         shared_ptr<T> lock() const
         {
             return expired() ? shared_ptr<T>(*this) : shared_ptr<T>();
