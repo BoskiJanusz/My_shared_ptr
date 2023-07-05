@@ -91,3 +91,27 @@ TEST(weak_ptrTest, CopyAssignmentCounterEqualsTwoNullptr) {
 
     EXPECT_EQ(expected, ptrCounter);
 }
+
+TEST(weak_ptrTest, MoveOperatorMoveOriginalPtrEqualsNullTest) {
+    my::shared_ptr<int> shared1(new int {20});
+    my::shared_ptr<int> shared2(new int {20});
+    my::weak_ptr<int> originalPtr(shared1);
+    my::weak_ptr<int> newPtr(shared2);
+    newPtr = std::move(originalPtr);
+    auto nullValue = originalPtr.expired();
+    auto expected = false;
+
+    EXPECT_EQ(expected, nullValue);
+}
+
+TEST(weak_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest) {
+    my::shared_ptr<int> shared1(new int {20});
+    my::shared_ptr<int> shared2(new int {20});
+    my::weak_ptr<int> originalPtr(shared1);
+    my::weak_ptr<int> newPtr(shared2);
+    newPtr = std::move(originalPtr);
+    auto notNullValue = newPtr.expired();
+    auto expected = true;
+
+    EXPECT_EQ(expected, notNullValue);
+}
