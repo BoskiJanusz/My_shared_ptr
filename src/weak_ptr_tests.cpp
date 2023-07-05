@@ -10,6 +10,23 @@ TEST(weak_ptrTest, FunctionUseCountEqualsNullptr) {
     EXPECT_EQ(expected, value);
 }
 
+TEST(weak_ptrTest, FunctionLockWeakPtrIsNull) {
+    my::weak_ptr<int> weak_ptr;
+    auto value = weak_ptr.lock().get();
+    auto expected = nullptr;
+
+    EXPECT_EQ(expected, value);
+}
+
+TEST(weak_ptrTest, FunctionLockWeakPtrOtherShared) {
+    my::shared_ptr<int> shared_ptr(new int{10});
+    my::weak_ptr<int> weak_ptr(shared_ptr);
+    auto value = weak_ptr.lock().use_count();
+    auto expected = 2;
+
+    EXPECT_EQ(expected, value);
+}
+
 TEST(weak_ptrTest, ConstructorWeakPtrEqualsSharedPtr) {
     my::shared_ptr<int> shared_ptr(new int{10});
     my::weak_ptr<int> weak_ptr(shared_ptr);
