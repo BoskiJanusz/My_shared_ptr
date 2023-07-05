@@ -93,8 +93,8 @@ TEST(weak_ptrTest, CopyAssignmentCounterEqualsTwoNullptr) {
 }
 
 TEST(weak_ptrTest, MoveOperatorMoveOriginalPtrEqualsNullTest) {
-    my::shared_ptr<int> shared1(new int {20});
-    my::shared_ptr<int> shared2(new int {20});
+    my::shared_ptr<int> shared1(new int{20});
+    my::shared_ptr<int> shared2(new int{20});
     my::weak_ptr<int> originalPtr(shared1);
     my::weak_ptr<int> newPtr(shared2);
     newPtr = std::move(originalPtr);
@@ -105,8 +105,8 @@ TEST(weak_ptrTest, MoveOperatorMoveOriginalPtrEqualsNullTest) {
 }
 
 TEST(weak_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest) {
-    my::shared_ptr<int> shared1(new int {20});
-    my::shared_ptr<int> shared2(new int {20});
+    my::shared_ptr<int> shared1(new int{20});
+    my::shared_ptr<int> shared2(new int{20});
     my::weak_ptr<int> originalPtr(shared1);
     my::weak_ptr<int> newPtr(shared2);
     newPtr = std::move(originalPtr);
@@ -117,7 +117,7 @@ TEST(weak_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest) {
 }
 
 TEST(weak_ptrTest, MoveConstructorMoveOriginalPtrEqualsNullTest) {
-    my::shared_ptr<int> shared(new int {20});
+    my::shared_ptr<int> shared(new int{20});
     my::weak_ptr<int> originalPtr(shared);
     my::weak_ptr<int> newPtr(std::move(originalPtr));
     newPtr = std::move(originalPtr);
@@ -128,7 +128,7 @@ TEST(weak_ptrTest, MoveConstructorMoveOriginalPtrEqualsNullTest) {
 }
 
 TEST(weak_ptrTest, MoveConstructorMoveNewPtrNotEqualsNullTest) {
-    my::shared_ptr<int> shared(new int {20});
+    my::shared_ptr<int> shared(new int{20});
     my::weak_ptr<int> originalPtr(shared);
     my::weak_ptr<int> newPtr(std::move(originalPtr));
     auto notNullValue = newPtr.expired();

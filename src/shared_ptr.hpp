@@ -2,7 +2,8 @@
 #include "weak_ptr.hpp"
 
 namespace my {
-template<class Y> class weak_ptr;
+template <class Y>
+class weak_ptr;
 template <class T>
 class shared_ptr {
 protected:
@@ -28,12 +29,9 @@ public:
     shared_ptr(const weak_ptr<T>& obj)
         : ptr_(obj.ptr_), shared_refs_(obj.shared_refs_) {
         if (obj.ptr_) {
-            if(obj.shared_refs_)
-            {
+            if (obj.shared_refs_) {
                 (*shared_refs_)++;
-            }
-            else
-            {
+            } else {
                 shared_refs_ = new size_t{1};
             }
         }
@@ -104,6 +102,7 @@ public:
     ~shared_ptr() {
         deleter();
     }
+
 private:
     void deleter() {
         if (shared_refs_) {
@@ -120,6 +119,7 @@ private:
             }
         }
     }
-    template<class Y> friend class weak_ptr;
+    template <class Y>
+    friend class weak_ptr;
 };
 }  // namespace my
