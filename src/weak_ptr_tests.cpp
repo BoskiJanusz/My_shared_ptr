@@ -115,3 +115,24 @@ TEST(weak_ptrTest, MoveOperatorMoveNewPtrNotEqualsNullTest) {
 
     EXPECT_EQ(expected, notNullValue);
 }
+
+TEST(weak_ptrTest, MoveConstructorMoveOriginalPtrEqualsNullTest) {
+    my::shared_ptr<int> shared(new int {20});
+    my::weak_ptr<int> originalPtr(shared);
+    my::weak_ptr<int> newPtr(std::move(originalPtr));
+    newPtr = std::move(originalPtr);
+    auto nullValue = originalPtr.expired();
+    auto expected = false;
+
+    EXPECT_EQ(expected, nullValue);
+}
+
+TEST(weak_ptrTest, MoveConstructorMoveNewPtrNotEqualsNullTest) {
+    my::shared_ptr<int> shared(new int {20});
+    my::weak_ptr<int> originalPtr(shared);
+    my::weak_ptr<int> newPtr(std::move(originalPtr));
+    auto notNullValue = newPtr.expired();
+    auto expected = true;
+
+    EXPECT_EQ(expected, notNullValue);
+}
